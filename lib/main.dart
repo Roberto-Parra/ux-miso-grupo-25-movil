@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'alerta_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -113,7 +114,10 @@ class InicioSesionScreen extends StatelessWidget {
                                   // Resto de la decoración
                                 ),
                                 onPressed: () {
-                                  // TODO: Implementar funcionalidad
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => AlertaScreen()),
+                                      );
                                 },
                               ),
                             ),
