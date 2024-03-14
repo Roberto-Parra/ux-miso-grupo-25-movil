@@ -19,12 +19,25 @@ class AlertsScreen extends StatelessWidget {
         backgroundColor: const Color(0xff999999),
         elevation: 0,
         actions: <Widget>[
-          IconButton(
-            icon: Image.asset('assets/images/setting.png'),
-            onPressed: () {
-              // Acciones al presionar el botón de ajustes
-            },
+          PopupMenuButton<String>(
+      onSelected: (String value) {
+        // Acciones cuando se selecciona una opción
+        print(value); // Solo para fines de demostración
+      },
+      itemBuilder: (BuildContext context) {
+        return <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'Estado',
+            child: Text('Estado'),
           ),
+          const PopupMenuItem<String>(
+            value: 'Materia',
+            child: Text('Materia'),
+          ),
+        ];
+      },
+      icon: Image.asset('assets/images/setting.png'),
+    ),
         ],
       ),
       body: Container(
@@ -171,6 +184,7 @@ weekendTextStyle: const TextStyle(
 color: Colors.red,
 ),
 thisMonthDayBorderColor: Colors.grey,
+// Add other configurations here
 height: 350,
 selectedDateTime: _selectedDate,
 daysHaveCircularBorder: false,
