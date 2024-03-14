@@ -47,7 +47,7 @@ class InicioSesionScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         const Image(
-                          image: AssetImage('assets/images/logo.png'),
+                          image: AssetImage('assets/images/Logo1.png'),
                           width: 200, 
                           height: 50,),
                         const SizedBox(height: 40),
