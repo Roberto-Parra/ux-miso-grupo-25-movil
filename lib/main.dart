@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'notification_screen.dart';
 import 'register_screen.dart';
+import 'recover_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,6 +59,9 @@ class InicioSesionScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5.0),
                               borderSide: const BorderSide(color: Colors.black),
                             ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 2.0),
+                              ),
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -68,7 +72,10 @@ class InicioSesionScreen extends StatelessWidget {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0),
                               borderSide: const BorderSide(color: Colors.black),
-                            )
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 2.0),
+                              ),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -78,7 +85,10 @@ class InicioSesionScreen extends StatelessWidget {
                             style: TextStyle(color: Color(0xFF045CFC)),
                           ),
                           onPressed: () {
-                            // TODO: Implementar funcionalidad
+                            Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => RecoverScreen()),
+                                      );
                           },
                         ),
                         const SizedBox(height: 20),

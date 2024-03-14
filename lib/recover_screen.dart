@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'main.dart';
 
 // ignore: use_key_in_widget_constructors
-class RegisterScreen extends StatelessWidget {
+class RecoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           const Text(
-                            'Regístrate',
+                            'Ingrese el correo',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.black,
@@ -44,17 +44,13 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          _buildTextFormField('Nombre'), 
-                          _buildTextFormField('Correo electrónico'), 
-                          _buildTextFormField('Contraseña', isPassword: true), 
-                          _buildTextFormField('Confirmar contraseña', isPassword: true), 
-                          const SizedBox(height: 32),
+                          _buildTextFormField('Correo de recuperación'),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               _buildButton(context, 'Volver', Colors.white,
                                   Colors.black),
-                              _buildButton(context, 'Crear Cuenta', const
+                              _buildButton(context, 'Siguiente', const
                                   Color(0xFF045CFC), Colors.white),
                             ],
                           ),
@@ -73,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
 
   Widget _buildTextFormField(String label, {bool isPassword = false}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40.0),
+      padding: const EdgeInsets.only(bottom: 30.0),
       child: TextFormField(
         decoration: InputDecoration(
           labelText: label,
@@ -104,13 +100,84 @@ class RegisterScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0)), 
         padding: const EdgeInsets.symmetric(
-            horizontal: 32.0, vertical: 8.0), 
+            horizontal: 32.0, vertical: 2.0), 
       ),
       onPressed: () {
+        if (text == 'Siguiente') {
+        _showRecoveryDialog(context); // Llama al diálogo de recuperación
+      } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => InicioSesionScreen()),
         );
+      }
       },
     );
   }
+  void _showRecoveryDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        //titlePadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0),
+        //contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0),
+        //actionsPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+        insetPadding: const EdgeInsets.all(10),
+        buttonPadding: const EdgeInsets.all(0),
+        title: Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.check_circle_outline,
+              color: Colors.black,
+              size: 24,
+            ),
+            const SizedBox(width: 30), 
+            Expanded(
+              child: RichText(
+                textAlign: TextAlign.left,
+                text: TextSpan(
+                  text: 'Se envió un mensaje al correo ',
+                  style: TextStyle(color: Colors.black),
+                  children: const <TextSpan>[
+                    TextSpan(
+                      text: 'Cesar@gmail.com',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          Center(
+            child: TextButton(
+              child: const Text('Aceptar', style: TextStyle(color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop(); 
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => InicioSesionScreen()), 
+                );
+              },
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
 }
