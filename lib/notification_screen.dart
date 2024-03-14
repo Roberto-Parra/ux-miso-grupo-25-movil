@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'loading_screen.dart';
 
+// ignore: use_key_in_widget_constructors
 class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(24),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(24),
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/backgroundPaper.png'),
             fit: BoxFit.cover,
@@ -25,7 +26,7 @@ class NotificationScreen extends StatelessWidget {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0), 
+                      padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0), 
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(20.0),
@@ -33,7 +34,7 @@ class NotificationScreen extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'TIENES UNA INASISTENCIA EN',
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -41,7 +42,7 @@ class NotificationScreen extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'MATEMÁTICAS',
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -50,18 +51,18 @@ class NotificationScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 20), 
-                          Icon(
+                          const SizedBox(height: 20), 
+                          const Icon(
                             Icons.notifications_active,
                             size: 60.0,
                             color: Colors.black,
                           ),
-                          SizedBox(height: 32), 
+                          const SizedBox(height: 32), 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
                             children: [
                               _buildButton(context, 'Ignorar', Colors.white, Colors.black), 
-                              _buildButton(context, 'Aceptar', Color(0xFF045CFC), Colors.white), 
+                              _buildButton(context, 'Aceptar', const Color(0xFF045CFC), Colors.white), 
                             ],
                           ),
                         ],
@@ -81,9 +82,9 @@ class NotificationScreen extends StatelessWidget {
   return ElevatedButton(
     child: Text(text, style: TextStyle(color: textColor)),
     style: ElevatedButton.styleFrom(
-      foregroundColor: textColor, backgroundColor: bgColor, // Color del texto
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)), // Forma de los botones
-      padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0), // Padding interno de los botones
+      foregroundColor: textColor, backgroundColor: bgColor, 
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)), 
+      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0), 
     ),
     onPressed: () {
       Navigator.of(context).pushReplacement(

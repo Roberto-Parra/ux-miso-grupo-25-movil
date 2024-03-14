@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:intl/intl.dart';
 
+// ignore: use_key_in_widget_constructors
 class AlertsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class AlertsScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.png'),
             fit: BoxFit.cover,
@@ -55,10 +56,10 @@ class AlertsScreen extends StatelessWidget {
     return Card(
       elevation: 0,
       color: Colors.white.withOpacity(0.36),
-      margin: EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(10.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
-        side: BorderSide(
+        side: const BorderSide(
           color: Colors.black,
         ),
       ),
@@ -67,7 +68,7 @@ class AlertsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, 
           children: <Widget>[
-            Text(
+            const Text(
               'Tienes una inasistencia en',
               style: TextStyle(
                 fontSize: 16.37,
@@ -75,27 +76,27 @@ class AlertsScreen extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 37.42,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
               'Último plazo $date',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.37,
                 fontStyle: FontStyle.italic,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 _buildSquareButton(Icons.attach_file), 
-                SizedBox(width: 10), // Espacio entre botones
+                const SizedBox(width: 10),
                 _buildSquareButton(Icons.settings), 
-                SizedBox(width: 10), 
+                const SizedBox(width: 10), 
                 _buildSquareButton(Icons.priority_high), 
               ],
             ),
@@ -122,6 +123,7 @@ color: Colors.black,
 }
 }
 
+// ignore: use_key_in_widget_constructors
 class CalendarButton extends StatefulWidget {
 @override
 _CalendarButtonState createState() => _CalendarButtonState();
@@ -146,10 +148,10 @@ children: <Widget>[
 ListTile(
 title: Text(
 DateFormat('MMMM yyyy').format(_selectedDate),
-style: TextStyle(fontWeight: FontWeight.bold),
+style: const TextStyle(fontWeight: FontWeight.bold),
 ),
 trailing: IconButton(
-icon: isExpanded ? Icon(Icons.arrow_drop_up) : Icon(Icons.arrow_drop_down),
+icon: isExpanded ? const Icon(Icons.arrow_drop_up) : const Icon(Icons.arrow_drop_down),
 onPressed: () {
 setState(() {
 isExpanded = !isExpanded;
@@ -158,18 +160,17 @@ isExpanded = !isExpanded;
 ),
 ),
 AnimatedContainer(
-duration: Duration(milliseconds: 500),
+duration: const Duration(milliseconds: 500),
 curve: Curves.easeInOut,
-height: isExpanded ? 350 : 0, // Change the height accordingly
+height: isExpanded ? 350 : 0,
 child: CalendarCarousel(
 onDayPressed: (DateTime date, List<dynamic> events) {
     this.setState(() => _selectedDate = date);
   },
-weekendTextStyle: TextStyle(
+weekendTextStyle: const TextStyle(
 color: Colors.red,
 ),
 thisMonthDayBorderColor: Colors.grey,
-// Add other configurations here
 height: 350,
 selectedDateTime: _selectedDate,
 daysHaveCircularBorder: false,

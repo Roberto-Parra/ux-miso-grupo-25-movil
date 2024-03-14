@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'alerts_screen.dart'; // Asegúrate de importar alerts_screen.dart correctamente
 
+// ignore: use_key_in_widget_constructors
 class LoadScreen extends StatefulWidget {
   @override
   _LoadScreenState createState() => _LoadScreenState();
@@ -15,9 +16,7 @@ class _LoadScreenState extends State<LoadScreen> {
   }
 
   _navigateToAlertsAfterDelay() async {
-    // Esperar 2 segundos
-    await Future.delayed(Duration(seconds: 1));
-    // Navegar a AlertsScreen después del retraso
+    await Future.delayed(const Duration(seconds: 1));
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => AlertsScreen()),
     );
@@ -25,10 +24,9 @@ class _LoadScreenState extends State<LoadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Pantalla de carga con la imagen de fondo
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/load.png'),
             fit: BoxFit.cover,
