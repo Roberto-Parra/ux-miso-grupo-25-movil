@@ -8,12 +8,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Login Design',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
       home: InicioSesionScreen(),
     );
   }
@@ -23,65 +19,110 @@ class InicioSesionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-              image: AssetImage('assets/images/background.png'), // Reemplaza con tu ruta de imagen.
-              fit: BoxFit.cover, // Esto asegurará que la imagen cubra toda la pantalla.
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background.png'),
+            fit: BoxFit.cover,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 80),
-                Text(
-                  'CLASS HECK',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                  // Añadimos el Container con Box Decoration para el fondo semitransparente
+                  Container(
+                    padding: EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.36),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Class check',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Correo electrónico',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            // Resto de la decoración
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            hintText: 'Contraseña',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: BorderSide(color: Colors.black),
+                            )
+                            // Resto de la decoración
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                        TextButton(
+                          child: Text(
+                            '¿Olvidaste la contraseña?',
+                            style: TextStyle(color: Color(0xFF045CFC)),
+                          ),
+                          onPressed: () {
+                            // TODO: Implementar funcionalidad
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        // Añadimos el Row para los botones "Crear cuenta" y "Siguiente"
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                child: Text(
+                                  'Crear cuenta',
+                                  style: TextStyle(color: Color(0xFF045CFC)),
+                                ),
+                                onPressed: () {
+                                  // TODO: Navegar a la pantalla de crear cuenta
+                                },
+                              ),
+                            ),
+                            SizedBox(width: 20), // Espacio entre botones
+                            Expanded(
+                              child: ElevatedButton(
+                                child: Text('Siguiente',
+                                style: TextStyle(color: Colors.white)),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFF045CFC),
+                                  // Resto de la decoración
+                                ),
+                                onPressed: () {
+                                  // TODO: Implementar funcionalidad
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 60),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Correo electrónico',
-                    // Aquí personalizas tu TextFormField
-                  ),
-                ),
-                SizedBox(height: 20),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Contraseña',
-                    // Personaliza tu TextFormField
-                  ),
-                  obscureText: true,
-                ),
-                SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    child: Text('¿Olvidaste la contraseña?'),
-                    onPressed: () {
-                      // Lógica para olvidar la contraseña
-                    },
-                  ),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  child: Text('Siguiente'),
-                  onPressed: () {
-                    // Lógica para el inicio de sesión
-                  },
-                ),
-                TextButton(
-                  child: Text('Crear cuenta'),
-                  onPressed: () {
-                    // Navegar a la pantalla de crear cuenta
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
