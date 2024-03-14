@@ -45,15 +45,10 @@ class InicioSesionScreen extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Text(
-                          'Class check',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
+                        Image(
+                          image: AssetImage('assets/images/logo.png'),
+                          width: 200, 
+                          height: 50,),
                         SizedBox(height: 40),
                         TextFormField(
                           decoration: InputDecoration(
@@ -103,7 +98,7 @@ class InicioSesionScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                            SizedBox(width: 20), // Espacio entre botones
+                            SizedBox(width: 20), 
                             Expanded(
                               child: ElevatedButton(
                                 child: Text('Siguiente',

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'loading_screen.dart';
-import 'alerts_screen.dart';
 
 class NotificationScreen extends StatelessWidget {
   @override
@@ -79,25 +78,18 @@ class NotificationScreen extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context, String text, Color bgColor, Color textColor) {
-    return ElevatedButton(
-      child: Text(text, style: TextStyle(color: textColor)),
-      style: ElevatedButton.styleFrom(
-        foregroundColor: textColor, backgroundColor: bgColor, // Color del texto
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)), // Forma de los botones
-        padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0), // Padding interno de los botones
-      ),
-      onPressed: () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => LoadScreen()),
-        );
-
-  Future.delayed(Duration(seconds: 2), () {
-    // Lógica para navegar a la próxima pantalla después de la transición
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => AlertsScreen()), 
-    );
-  });
-      },
-    );
-  }
+  return ElevatedButton(
+    child: Text(text, style: TextStyle(color: textColor)),
+    style: ElevatedButton.styleFrom(
+      foregroundColor: textColor, backgroundColor: bgColor, // Color del texto
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)), // Forma de los botones
+      padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0), // Padding interno de los botones
+    ),
+    onPressed: () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => LoadScreen()),
+      );
+    },
+  );
+}
 }
