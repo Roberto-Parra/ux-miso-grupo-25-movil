@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:ui'; // Importar para usar ImageFilter.blur
+import 'dart:ui';
+import 'loading_screen.dart';
+import 'alerts_screen.dart';
 
-class AlertaScreen extends StatelessWidget {
+class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,7 @@ class AlertaScreen extends StatelessWidget {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0), // Aumenta el espaciado
+                      padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0), 
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(20.0),
@@ -49,18 +51,18 @@ class AlertaScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 20), // Espacio entre texto y campana
+                          SizedBox(height: 20), 
                           Icon(
                             Icons.notifications_active,
                             size: 60.0,
                             color: Colors.black,
                           ),
-                          SizedBox(height: 32), // Espacio entre campana y botones
+                          SizedBox(height: 32), 
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribuye el espacio uniformemente
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
                             children: [
-                              _buildButton(context, 'Ignorar', Colors.white, Colors.black), // Botón Ignorar con texto negro
-                              _buildButton(context, 'Aceptar', Color(0xFF045CFC), Colors.white), // Botón Aceptar con texto blanco
+                              _buildButton(context, 'Ignorar', Colors.white, Colors.black), 
+                              _buildButton(context, 'Aceptar', Color(0xFF045CFC), Colors.white), 
                             ],
                           ),
                         ],
@@ -85,7 +87,16 @@ class AlertaScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0), // Padding interno de los botones
       ),
       onPressed: () {
-        // TODO: Agregar funcionalidad de botón
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => LoadScreen()),
+        );
+
+  Future.delayed(Duration(seconds: 2), () {
+    // Lógica para navegar a la próxima pantalla después de la transición
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => AlertsScreen()), 
+    );
+  });
       },
     );
   }
