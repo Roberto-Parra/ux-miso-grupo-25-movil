@@ -76,7 +76,7 @@ class InicioSesionScreen extends StatelessWidget {
                             // Resto de la decoración
                           ),
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 10),
                         TextButton(
                           child: Text(
                             '¿Olvidaste la contraseña?',
@@ -109,6 +109,7 @@ class InicioSesionScreen extends StatelessWidget {
                                 style: TextStyle(color: Colors.white)),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(0xFF045CFC),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
                                   // Resto de la decoración
                                 ),
                                 onPressed: () {
