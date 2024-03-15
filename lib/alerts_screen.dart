@@ -21,7 +21,6 @@ class AlertsScreen extends StatelessWidget {
         actions: <Widget>[
           PopupMenuButton<String>(
       onSelected: (String value) {
-        // Acciones cuando se selecciona una opción
         print(value); // Solo para fines de demostración
       },
       itemBuilder: (BuildContext context) {
@@ -106,11 +105,11 @@ class AlertsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                _buildSquareButton(Icons.attach_file), 
+                _buildSquareButton(Icons.attach_file, context), 
                 const SizedBox(width: 10),
-                _buildSquareButton(Icons.settings), 
+                _buildSquareButton(Icons.settings, context), 
                 const SizedBox(width: 10), 
-                _buildSquareButton(Icons.priority_high), 
+                _buildSquareButton(Icons.priority_high, context), 
               ],
             ),
           ],
@@ -119,21 +118,170 @@ class AlertsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSquareButton(IconData icon) {
-    return Container(
-      width: 50, 
-      height: 50, 
-      decoration: BoxDecoration(
-        color: Colors.white, 
-        borderRadius: BorderRadius.circular(8), 
-        border: Border.all(color: Colors.black), 
+  Widget _buildSquareButton(IconData icon, BuildContext context) {
+  return Container(
+    width: 50,
+    height: 50,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: Colors.black),
+    ),
+    child: IconButton(
+      icon: Icon(
+        icon,
+        color: Colors.black,
+      ),
+      onPressed: () {
+        if (icon == Icons.priority_high) {
+          _showPriorityDialog(context);
+        }
+      },
+    ),
+  );
+}
+void _showPriorityDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
         ),
-child: Icon(
-icon,
-color: Colors.black,
+        insetPadding: const EdgeInsets.all(10),
+        buttonPadding: const EdgeInsets.all(0),
+        title: Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.check_circle_outline,
+              color: Colors.black,
+              size: 24,
+            ),
+            const SizedBox(width: 30),
+            Expanded(
+  child: RichText(
+    textAlign: TextAlign.left,
+    text: const TextSpan(
+      children: [
+        TextSpan(
+          text: 'Estas seguro? \n', // Añade '\n' para el salto de línea
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        TextSpan(
+          text: 'Vas a apelar a la inasistencia',
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal),
+        ),
+      ],
+    ),
+  ),
+), 
+          ],
+        ),
+        actions: <Widget>[
+  Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      TextButton(
+        child: const Text('No, cancelar', style: TextStyle(color: Colors.black)),
+        onPressed: () {
+          Navigator.of(context).pop(); 
+        },
+      ),
+      const SizedBox(width: 8), 
+      TextButton(
+        child: const Text('Sí, confirmar', style: TextStyle(color: Colors.black)),
+        onPressed: () {
+          Navigator.of(context).pop(); 
+          _showConfirmationDialog(context); 
+        },
+      ),
+    ],
+  ),
+]
+      );
+    },
+  );
+}
+
+void _showConfirmationDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        insetPadding: const EdgeInsets.all(10),
+        buttonPadding: const EdgeInsets.all(0),
+        title: Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.check_circle_outline,
+              color: Colors.black,
+              size: 24,
+            ),
+            const SizedBox(width: 30), 
+            Expanded(
+          child: RichText(
+            textAlign: TextAlign.left,
+            text: const TextSpan(
+              children: [
+                TextSpan(
+                  text: 'El profesor ha sido notificado\n', // Añade '\n' para el salto de línea
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: 'Espera su respuesta',
+                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
+          ),
+)
+          ],
+        ),
+        actions: <Widget>[
+          Center(
+  child: TextButton(
+    child: const Text(
+      'Aceptar',
+      style: TextStyle(color: Colors.white), 
+    ),
+    style: TextButton.styleFrom(
+      backgroundColor: Color(0xFF48464C), 
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), 
+    ),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  ),
 ),
+    ],
+  );
+},
 );
 }
+
 }
 
 // ignore: use_key_in_widget_constructors
@@ -149,48 +297,44 @@ class Event {
   Event(this.date, this.title);
 }
 
-
 class _CalendarButtonState extends State<CalendarButton> {
 bool isExpanded = false;
 DateTime _selectedDate = DateTime.now();
 
 @override
 Widget build(BuildContext context) {
-return Column(
-children: <Widget>[
-ListTile(
-title: Text(
-DateFormat('MMMM yyyy').format(_selectedDate),
-style: const TextStyle(fontWeight: FontWeight.bold),
-),
-trailing: IconButton(
-icon: isExpanded ? const Icon(Icons.arrow_drop_up) : const Icon(Icons.arrow_drop_down),
-onPressed: () {
-setState(() {
-isExpanded = !isExpanded;
-});
-},
-),
-),
-AnimatedContainer(
-duration: const Duration(milliseconds: 500),
-curve: Curves.easeInOut,
-height: isExpanded ? 350 : 0,
-child: CalendarCarousel(
-onDayPressed: (DateTime date, List<dynamic> events) {
-    this.setState(() => _selectedDate = date);
-  },
-weekendTextStyle: const TextStyle(
-color: Colors.red,
-),
-thisMonthDayBorderColor: Colors.grey,
-// Add other configurations here
-height: 350,
-selectedDateTime: _selectedDate,
-daysHaveCircularBorder: false,
-),
-),
-],
-);
-}
+  return Column(
+    children: <Widget>[
+      ListTile(
+        title: Text(
+          DateFormat('MMMM yyyy').format(_selectedDate),
+          style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          trailing: IconButton(
+            icon: isExpanded ? const Icon(Icons.arrow_drop_up) : const Icon(Icons.arrow_drop_down),
+            onPressed: () {
+              setState(() {isExpanded = !isExpanded;});
+              },
+              ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                height: isExpanded ? 350 : 0,
+                child: CalendarCarousel(
+                  onDayPressed: (DateTime date, List<dynamic> events) {
+                    this.setState(() => _selectedDate = date);
+                    },
+                    weekendTextStyle: const TextStyle(
+                      color: Colors.red,
+                      ),
+                      thisMonthDayBorderColor: Colors.grey,
+                      height: 350,
+                      selectedDateTime: _selectedDate,
+                      daysHaveCircularBorder: false,
+                      ),
+                      ),
+                      ],
+                      );
+                      }
 }//
