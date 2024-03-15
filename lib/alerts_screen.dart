@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:intl/intl.dart';
+import 'package:file_picker/file_picker.dart';
 
 // ignore: use_key_in_widget_constructors
 class AlertsScreen extends StatelessWidget {
@@ -136,6 +137,12 @@ class AlertsScreen extends StatelessWidget {
         if (icon == Icons.priority_high) {
           _showPriorityDialog(context);
         }
+        if (icon == Icons.attach_file) {
+          _showPriorityDialog2(context, 'Adjuntar');
+        }
+        if (icon == Icons.settings) {
+          _showPriorityDialog2(context,'Cambia Tono');
+        }
       },
     ),
   );
@@ -247,7 +254,7 @@ void _showConfirmationDialog(BuildContext context) {
             text: const TextSpan(
               children: [
                 TextSpan(
-                  text: 'El profesor ha sido notificado\n', // Añade '\n' para el salto de línea
+                  text: 'El profesor ha sido notificado\n', 
                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
@@ -282,12 +289,79 @@ void _showConfirmationDialog(BuildContext context) {
 );
 }
 
+void _showPriorityDialog2(BuildContext context, String title) async {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.attach_file),
+              title: const Text('Whatsapp'),
+              onTap: () => _pickFile(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.attach_file),
+              title: const Text('Documentos'),
+              onTap: () => _pickFile(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.attach_file),
+              title: const Text('Descargas'),
+              onTap: () => _pickFile(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.attach_file),
+              title: const Text('Galeria'),
+              onTap: () => _pickFile(context),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+            TextButton(
+              child: const Text('Cancelar', style: TextStyle(color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            const SizedBox(width: 8), 
+            TextButton(
+              child: const Text('Aceptar', style: TextStyle(color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+    ],
+  ),
+        ],
+      );
+    },
+  );
+}
+
+void _pickFile(BuildContext context) async {
+  Navigator.of(context).pop();
+  
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+  if (result != null) {
+  } else {
+    // El usuario canceló la selección
+  }
+}
+
 }
 
 // ignore: use_key_in_widget_constructors
 class CalendarButton extends StatefulWidget {
-@override
-_CalendarButtonState createState() => _CalendarButtonState();
+  @override
+  _CalendarButtonState createState() => _CalendarButtonState();
 }
 
 class Event {
@@ -298,8 +372,8 @@ class Event {
 }
 
 class _CalendarButtonState extends State<CalendarButton> {
-bool isExpanded = false;
-DateTime _selectedDate = DateTime.now();
+  bool isExpanded = false;
+  DateTime _selectedDate = DateTime.now();
 
 @override
 Widget build(BuildContext context) {
